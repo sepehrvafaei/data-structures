@@ -25,10 +25,8 @@ class linked_list:
             temp=temp.next
         if temp == None:
             return false
-        
         else:
             return temp
-    
     def delete(self,data):
         prevoiu=None
         temp=self.head
@@ -37,7 +35,6 @@ class linked_list:
             temp=temp.next
         if temp == None:
             return false
-        
         else:
             prevoius.next=temp.next
             temp=None
