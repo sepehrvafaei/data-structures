@@ -17,5 +17,10 @@ public:
 	void AddItem(std::string name, std::string drink);
 	int NumberOfItemsInIndex(int index);
 	void PrintTable();
+	void PrintItemsOfIndex(int index);
+	void FindDrink(std::string name);
+	void RemoveItem(std::string name);
+
  };
 #endif
+
