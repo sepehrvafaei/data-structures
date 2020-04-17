@@ -3,19 +3,26 @@
 using namespace std;
 #include"BST.h"
 
-BST::BST() {
-	root = nullptr;
-}
+void BST::destroySubTree(node *nodePtr)
+{
+   if (nodePtr)
+   {
+      if (nodePtr->left)
+         destroySubTree(nodePtr->left);
+      if (nodePtr->right)
+         destroySubTree(nodePtr->right);
+      delete nodePtr;
+   }
 BST::node* BST::CreatLeaf(int key) {
 	node* n = new node;
 	n->key = key;
 	n->left = nullptr;
 	n->right = nullptr;
 }
-void BST::AddLeaf(int key) {
+void BST::insert(int key) {
 	BST::AddLeafPrivate(key, root);
 }
-void BST::AddLeafPrivate(int key, node* Ptr) {
+void BST::insertPrivate(int key, node* Ptr) {
 	if (root == nulptr) {
 		root = CraetLeaf(key);
 	}
@@ -117,6 +124,42 @@ int BST::FindSmallestPrivate(node* ptr) {
 			return ptr->key;
 		}
 	}
+}
+void BST::remove(int num)
+{
+   deleteNode(num, root);
+}
+void IntBinaryTree::deleteNode(int num, TreeNode *&nodePtr){
+   if (num < nodePtr->value)
+      deleteNode(num, nodePtr->left);
+   else if (num > nodePtr->value)
+      deleteNode(num, nodePtr->right);
+   else
+      makeDeletion(nodePtr);
+}
+void BST::makeDeletion(BST *&nodePtr){
+   BST *tempNodePtr = nullptr;
+   if (nodePtr == nullptr){
+      cout << "Cannot delete empty node.\n";}
+   else if (nodePtr->right == nullptr){
+      tempNodePtr = nodePtr;
+      nodePtr = nodePtr->left;   
+      delete tempNodePtr;
+   }
+   else if (nodePtr->left == nullptr){
+      tempNodePtr = nodePtr;
+      nodePtr = nodePtr->right;  
+      delete tempNodePtr;
+   }
+   else{
+      tempNodePtr = nodePtr->right;
+      while (tempNodePtr->left)
+         tempNodePtr = tempNodePtr->left;
+      tempNodePtr->left = nodePtr->left;
+      tempNodePtr = nodePtr;
+      nodePtr = nodePtr->right;
+      delete tempNodePtr;
+   }
 }
 
 
